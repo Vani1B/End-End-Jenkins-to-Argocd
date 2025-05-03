@@ -59,6 +59,16 @@ Install minikube in the terminal
 
 ![image](https://github.com/user-attachments/assets/b376f29d-2059-4bc4-8d3f-323682b5d7db)
 
+Install Argocd operator on kubernetes
+
+![image](https://github.com/user-attachments/assets/b737a395-9650-44bb-9ba6-415a61baa4cb)
+
+![image](https://github.com/user-attachments/assets/9e56e83e-7f94-4995-8760-0eac246e1a23)
+
+
+
+
+
 
 
 
