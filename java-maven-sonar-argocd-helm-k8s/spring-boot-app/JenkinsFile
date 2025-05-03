@@ -1,23 +1,27 @@
 pipeline {
   agent {
     docker {
-      image 'cimg/base:stable'  // Docker CLI is available in this image
+      image 'cimg/base:stable'  // Includes Docker CLI
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
+
   stages {
     stage('Checkout') {
       steps {
-        sh 'echo passed'
+        sh 'echo Checkout passed'
+        // Uncomment below if auto-checkout from GitHub is needed
         // git branch: 'main', url: 'https://github.com/Vani1B/End-End-Jenkins-to-Argocd.git'
       }
     }
 
     stage('Build and Test') {
       steps {
-        sh 'apt update && apt install -y maven'
-        sh 'ls -ltr'
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+        sh '''
+          apt update && apt install -y maven
+          cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+          mvn clean package
+        '''
       }
     }
 
@@ -42,9 +46,12 @@ pipeline {
       }
       steps {
         script {
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+          sh '''
+            cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+            docker build -t ${DOCKER_IMAGE} .
+          '''
           def dockerImage = docker.image("${DOCKER_IMAGE}")
-          docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+          docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
             dockerImage.push()
           }
         }
@@ -71,4 +78,3 @@ pipeline {
     }
   }
 }
-
