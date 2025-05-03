@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'maven:3.9.4-eclipse-temurin-17'
+      image 'cimg/base:stable'  // Docker CLI is available in this image
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
@@ -15,6 +15,7 @@ pipeline {
 
     stage('Build and Test') {
       steps {
+        sh 'apt update && apt install -y maven'
         sh 'ls -ltr'
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
       }
@@ -28,7 +29,7 @@ pipeline {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh '''
             cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
-            mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=$SONAR_URL
+            mvn sonar:sonar -Dsonar.token=$SONAR_AUTH_TOKEN -Dsonar.host.url=$SONAR_URL
           '''
         }
       }
@@ -70,3 +71,4 @@ pipeline {
     }
   }
 }
+
