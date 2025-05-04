@@ -83,6 +83,10 @@ Argocd operator installed and get pods
 
 ![image](https://github.com/user-attachments/assets/c1f01737-2169-482c-bccd-339ec98c13d7)
 
+![image](https://github.com/user-attachments/assets/d803e267-46ad-4db6-82a1-99babab0055c)
+
+
+
 
 
 
