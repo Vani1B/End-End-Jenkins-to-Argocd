@@ -7,22 +7,22 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      agent { docker { image 'maven:3.9.6-eclipse-temurin-17'; args '--user root' } }
+      agent { docker { image 'maven:3.9.6-eclipse-temurin-17' } }
       steps {
-        echo 'Checking out code...'
+        echo 'Cloning the repo...'
         // git branch: 'main', url: 'https://github.com/Vani1B/End-End-Jenkins-to-Argocd.git'
       }
     }
 
     stage('Build and Test') {
-      agent { docker { image 'maven:3.9.6-eclipse-temurin-17'; args '--user root' } }
+      agent { docker { image 'maven:3.9.6-eclipse-temurin-17' } }
       steps {
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
       }
     }
 
     stage('Static Code Analysis') {
-      agent { docker { image 'maven:3.9.6-eclipse-temurin-17'; args '--user root' } }
+      agent { docker { image 'maven:3.9.6-eclipse-temurin-17' } }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh '''
@@ -38,7 +38,7 @@ pipeline {
     stage('Build and Push Docker Image') {
       agent any
       environment {
-        DOCKER_IMAGE = "abhishekf5/ultimate-cicd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "vanib/ultimate-cicd:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
