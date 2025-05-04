@@ -65,6 +65,17 @@ Install Argocd operator on kubernetes
 
 ![image](https://github.com/user-attachments/assets/9e56e83e-7f94-4995-8760-0eac246e1a23)
 
+I have run the Jenkins pipeline, got lot of issues with pipeline. I have done troubleshootings with volumes, versions 
+
+Jenkins is trying to run Docker CLI commands, but docker is not available inside that container.
+
+Even though you switched agent any for the Docker stage, because you're in a script block and used sh, it’s possibly executing within the original container context.
+
+Sonarqube is running good.
+
+![image](https://github.com/user-attachments/assets/6795b12e-6d8b-40dd-9ed4-22d3bfa2365d)
+
+
 
 
 
