@@ -75,6 +75,18 @@ Sonarqube is running good.
 
 ![image](https://github.com/user-attachments/assets/6795b12e-6d8b-40dd-9ed4-22d3bfa2365d)
 
+![image](https://github.com/user-attachments/assets/2ab4b430-3ee1-44e5-ae49-e3e8a5a5e9fe)
+
+Argocd operator installed and get pods 
+
+![image](https://github.com/user-attachments/assets/e243b6a8-514c-462d-aa02-0087bc45d0c9)
+
+![image](https://github.com/user-attachments/assets/c1f01737-2169-482c-bccd-339ec98c13d7)
+
+
+
+
+
 
 
 
