@@ -17,7 +17,11 @@ pipeline {
     stage('Build and Test') {
       agent { docker { image 'maven:3.9.6-eclipse-temurin-17' } }
       steps {
-        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+        sh '''
+          cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+          rm -rf target/sonar || true
+          mvn clean package
+        '''
       }
     }
 
